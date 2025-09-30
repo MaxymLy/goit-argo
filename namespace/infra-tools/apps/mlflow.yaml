@@ -34,10 +34,10 @@ spec:
   namespace: infra-tools
   server: https://kubernetes.default.svc
 
- syncPolicy:
-  automated:
-   prune: true
-   selfHeal: true
-  syncOptions:
-   - ServerSideApply=true
-   - SkipDryRunOnMissingResource=true
+ # syncPolicy:
+ #  automated:
+ #   prune: true
+ #   selfHeal: true
+ #  syncOptions:
+ #   - ServerSideApply=true
+ #   - SkipDryRunOnMissingResource=true
