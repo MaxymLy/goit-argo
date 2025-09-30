@@ -32,7 +32,7 @@ spec:
               effect: NoSchedule
         test:
           enabled: false   # ❌ не створювати тестовий ConfigMap з bash-скриптом
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  syncPolicy: {}
+    # automated:
+    #   prune: true
+    #   selfHeal: true
