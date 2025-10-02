@@ -14,28 +14,27 @@ spec:
     targetRevision: 12.5.6
     helm:
       valuesObject:
-        service:
-          type: ClusterIP
-          port: 5000
-        auth:
-          enabled: false
+        image:
+          registry: docker.io
+          repository: bitnamilegacy/postgresql
+          tag: 15.6.0-debian-11-r25
 
-        postgresql:
-          image:
-            registry: docker.io
-            repository: bitnamilegacy/postgresql
-            tag: 15.6.0-debian-11-r25
-          auth:
-            postgresPassword: mlflowpass
-            username: mlflow
-            password: mlflowpass
-            database: mlflow
+        auth:
+          postgresPassword: mlflowpass
+          username: mlflow
+          password: mlflowpass
+          database: mlflow
+
         primary:
           persistence:
             enabled: false
 
-      global:
-        imageRegistry: docker.io
+        service:
+          type: ClusterIP
+          port: 5432   # PostgreSQL порт, не 5000
+
+        global:
+          imageRegistry: docker.io
   syncPolicy:
     automated:
       prune: true
