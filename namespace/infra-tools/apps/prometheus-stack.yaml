@@ -83,10 +83,10 @@ spec:
           service:
             port: 9200
   project: default
-  syncPolicy: {}
-    # syncOptions:
-    # - Replace=true
-    # - ServerSideApply=true
-    # automated:
-    #   prune: true
-    #   selfHeal: true
+  syncPolicy:
+    syncOptions:
+    - Replace=true
+    - ServerSideApply=true
+    automated:
+      prune: true
+      selfHeal: true
