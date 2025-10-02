@@ -51,26 +51,6 @@ spec:
         - name: AWS_SECRET_ACCESS_KEY
           value: minioadmin
 
-     
-    extraObjects:
-      - apiVersion: batch/v1
-        kind: Job
-        metadata:
-          name: create-mlflow-bucket
-        spec:
-          template:
-            spec:
-              restartPolicy: OnFailure
-              containers:
-                - name: mc
-                  image: minio/mc
-                  command:
-                    - /bin/sh
-                    - -c
-                    - |
-                      mc alias set local http://mlflow-minio:9000 minioadmin minioadmin && \
-                      mc mb local/mlflow || echo "Bucket already exists"
-
  destination:
   namespace: infra-tools
   server: https://kubernetes.default.svc
