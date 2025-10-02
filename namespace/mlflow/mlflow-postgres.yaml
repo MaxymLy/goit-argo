@@ -33,6 +33,9 @@ spec:
         primary:
           persistence:
             enabled: false
+
+      global:
+        imageRegistry: docker.io
   syncPolicy:
     automated:
       prune: true
