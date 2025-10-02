@@ -14,10 +14,6 @@ spec:
     targetRevision: 17.0.21
     helm:
       valuesObject:
-        image:
-          registry: docker.io
-          repository: minio/minio
-          tag: latest
         auth:
           rootUser: minio
           rootPassword: minio123
@@ -25,6 +21,8 @@ spec:
         service:
           type: ClusterIP
         persistence:
+          enabled: false
+        console:
           enabled: false
   syncPolicy:
     automated:
