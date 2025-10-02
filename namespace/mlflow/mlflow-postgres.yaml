@@ -18,6 +18,7 @@ spec:
           registry: docker.io
           repository: bitnamilegacy/postgresql
           tag: 15.6.0-debian-11-r25
+          pullPolicy: IfNotPresent
 
         auth:
           postgresPassword: mlflowpass
