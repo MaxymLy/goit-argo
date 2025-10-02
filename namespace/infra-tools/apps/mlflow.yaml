@@ -30,14 +30,35 @@ spec:
       password: mlflowpass
       database: mlflowdb
 
+     minio:
+      enabled: true
+      mode: standalone
+      persistence:
+       enabled: false
+      resources:
+       requests:
+        memory: "128Mi"
+        cpu: "100m"
+
+     mlflow:
+       artifactRoot: s3://mlflow/
+       defaultArtifactRoot: s3://mlflow/
+       extraEnvVars:
+         - name: MLFLOW_S3_ENDPOINT_URL
+           value: http://mlflow-minio:9000
+         - name: AWS_ACCESS_KEY_ID
+           value: minioadmin
+         - name: AWS_SECRET_ACCESS_KEY
+           value: minioadmin
+
  destination:
   namespace: infra-tools
   server: https://kubernetes.default.svc
 
- syncPolicy: {}
-  # automated:
-  #  prune: true
-  #  selfHeal: true
-  # syncOptions:
-  #  - ServerSideApply=true
-  #  - SkipDryRunOnMissingResource=true
+ syncPolicy:
+  automated:
+   prune: true
+   selfHeal: true
+  syncOptions:
+   - ServerSideApply=true
+   - SkipDryRunOnMissingResource=true
