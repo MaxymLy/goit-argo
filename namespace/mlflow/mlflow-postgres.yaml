@@ -1,46 +1,46 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: mlflow-postgres
-  namespace: infra-tools
-spec:
-  destination:
-    namespace: mlflow
-    server: https://kubernetes.default.svc
-  project: default
-  source:
-    repoURL: https://charts.bitnami.com/bitnami
-    chart: postgresql
-    targetRevision: 12.5.6
-    helm:
-      valuesObject:
-        image:
-          registry: docker.io
-          repository: bitnamilegacy/postgresql
-          tag: 15.6.0-debian-11-r25
-          pullPolicy: IfNotPresent
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: mlflow-postgres
+#   namespace: infra-tools
+# spec:
+#   destination:
+#     namespace: mlflow
+#     server: https://kubernetes.default.svc
+#   project: default
+#   source:
+#     repoURL: https://charts.bitnami.com/bitnami
+#     chart: postgresql
+#     targetRevision: 12.5.6
+#     helm:
+#       valuesObject:
+#         image:
+#           registry: docker.io
+#           repository: bitnamilegacy/postgresql
+#           tag: 15.6.0-debian-11-r25
+#           pullPolicy: IfNotPresent
 
-        auth:
-          postgresPassword: mlflowpass
-          username: mlflow
-          password: mlflowpass
-          database: mlflow
+#         auth:
+#           postgresPassword: mlflowpass
+#           username: mlflow
+#           password: mlflowpass
+#           database: mlflow
 
-        primary:
-          persistence:
-            enabled: false
+#         primary:
+#           persistence:
+#             enabled: false
 
-        service:
-          type: ClusterIP
-          port: 5432   # PostgreSQL порт, не 5000
+#         service:
+#           type: ClusterIP
+#           port: 5432   # PostgreSQL порт, не 5000
 
-        global:
-          imageRegistry: docker.io
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
-      - SkipDryRunOnMissingResource=true
+#         global:
+#           imageRegistry: docker.io
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
+#       - ServerSideApply=true
+#       - SkipDryRunOnMissingResource=true
