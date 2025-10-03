@@ -16,10 +16,10 @@ spec:
       valuesObject:
 
         image:
-          registry: quay.io
-          repository: minio/minio
-          tag: RELEASE.2025-09-07T16-13-09Z
-          pullPolicy: IfNotPresent
+            registry: docker.io
+            repository: bitnamilegacy/minio
+            tag: 2023.12.23-debian-11-r0
+            pullPolicy: IfNotPresent
         
         mode: standalone
         
