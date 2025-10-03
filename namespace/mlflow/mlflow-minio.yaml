@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: minio
-    targetRevision: 17.0.21
+    targetRevision: 13.7.2
     helm:
       valuesObject:
         auth:
@@ -22,8 +22,8 @@ spec:
           type: ClusterIP
         persistence:
           enabled: false
-        console:
-          enabled: false
+        # console:
+        #   enabled: false
   syncPolicy:
     automated:
       prune: true
