@@ -1,64 +1,64 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
- name: mlflow
- namespace: infra-tools
-spec:
- project: default
- source:
-  repoURL: https://community-charts.github.io/helm-charts
-  chart: mlflow
-  targetRevision: 1.6.2
-  helm:
-   releaseName: mlflow
-   valuesObject:
-    service:
-     type: ClusterIP
-     port: 5000
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#  name: mlflow
+#  namespace: infra-tools
+# spec:
+#  project: default
+#  source:
+#   repoURL: https://community-charts.github.io/helm-charts
+#   chart: mlflow
+#   targetRevision: 1.6.2
+#   helm:
+#    releaseName: mlflow
+#    valuesObject:
+#     service:
+#      type: ClusterIP
+#      port: 5000
 
-    auth:
-     enabled: false
+#     auth:
+#      enabled: false
 
-    postgresql:
-     enabled: true
-     primary:
-      persistence:
-       enabled: false
-     auth:
-      postgresPassword: mlflowpass
-      username: mlflow
-      password: mlflowpass
-      database: mlflowdb
+#     postgresql:
+#      enabled: true
+#      primary:
+#       persistence:
+#        enabled: false
+#      auth:
+#       postgresPassword: mlflowpass
+#       username: mlflow
+#       password: mlflowpass
+#       database: mlflowdb
 
-    minio:
-     enabled: true
-     mode: standalone
-     persistence:
-      enabled: false
-     resources:
-      requests:
-       memory: "128Mi"
-       cpu: "100m"
+#     minio:
+#      enabled: true
+#      mode: standalone
+#      persistence:
+#       enabled: false
+#      resources:
+#       requests:
+#        memory: "128Mi"
+#        cpu: "100m"
 
-    mlflow:
-      artifactRoot: s3://mlflow/
-      defaultArtifactRoot: s3://mlflow/
-      extraEnvVars:
-        - name: MLFLOW_S3_ENDPOINT_URL
-          value: http://mlflow-minio:9000
-        - name: AWS_ACCESS_KEY_ID
-          value: minioadmin
-        - name: AWS_SECRET_ACCESS_KEY
-          value: minioadmin
+#     mlflow:
+#       artifactRoot: s3://mlflow/
+#       defaultArtifactRoot: s3://mlflow/
+#       extraEnvVars:
+#         - name: MLFLOW_S3_ENDPOINT_URL
+#           value: http://mlflow-minio:9000
+#         - name: AWS_ACCESS_KEY_ID
+#           value: minioadmin
+#         - name: AWS_SECRET_ACCESS_KEY
+#           value: minioadmin
 
- destination:
-  namespace: infra-tools
-  server: https://kubernetes.default.svc
+#  destination:
+#   namespace: infra-tools
+#   server: https://kubernetes.default.svc
 
- syncPolicy:
-  automated:
-   prune: true
-   selfHeal: true
-  syncOptions:
-   - ServerSideApply=true
-   - SkipDryRunOnMissingResource=true
+#  syncPolicy:
+#   automated:
+#    prune: true
+#    selfHeal: true
+#   syncOptions:
+#    - ServerSideApply=true
+#    - SkipDryRunOnMissingResource=true
