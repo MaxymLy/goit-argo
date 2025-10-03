@@ -41,7 +41,7 @@ spec:
 
 
   destination:
-    namespace: mlflow
+    namespace: application
     server: https://kubernetes.default.svc
 
 
