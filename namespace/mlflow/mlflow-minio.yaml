@@ -14,6 +14,15 @@ spec:
     targetRevision: 13.7.2
     helm:
       valuesObject:
+
+        image:
+          registry: quay.io
+          repository: minio/minio
+          tag: RELEASE.2024-09-30T00-12-30Z
+          pullPolicy: IfNotPresent
+        
+        mode: standalone
+        
         auth:
           rootUser: minio
           rootPassword: minio123
