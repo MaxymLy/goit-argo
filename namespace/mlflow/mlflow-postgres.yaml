@@ -5,7 +5,7 @@ metadata:
   namespace: infra-tools
 spec:
   destination:
-    namespace: mlflow
+    namespace: application
     server: https://kubernetes.default.svc
   project: default
   source:
